@@ -1,0 +1,30 @@
+overwrite: true
+schema:
+  - 'http://localhost:3333/graphql'
+documents:
+  - 'src/app/shared/graphql/**/*.{ts,js}'
+generates:
+  src/app/generated/graphql.ts:
+    plugins:
+      - add:
+          content:
+            - '/* eslint-disable @typescript-eslint/ban-types */'
+            - '/* eslint-disable @typescript-eslint/no-explicit-any */'
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      watch: true
+      useIndexSignature: true
+      skipGraphQLImport: true
+      withComponent: false
+      withResultType: false
+      reactApolloVersion: 3
+      withMutationFn: false
+      withHooks: false
+      withHOC: false
+      hooksImportFrom: '@apollo/client'
+    hooks:
+      afterOneFileWrite:
+        - prettier --write
+        - eslint --fix
