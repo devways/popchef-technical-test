@@ -5,5 +5,6 @@ export const RecipeTypeDefs = gql`
     id: ID!
     title: String
     content: String
+    ingredients: [Ingredient!]
   }
 `;
